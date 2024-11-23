@@ -66,6 +66,8 @@ public class GUI_Editor : Editor
         {
             dataPlotter.plotScale = EditorGUILayout.FloatField("Plot Scale", dataPlotter.plotScale);
             dataPlotter.radius2 = EditorGUILayout.FloatField("Secondary Sphere Radius", dataPlotter.radius2);
+            // Add a dropdown (Popup) for selecting the rounding option
+            dataPlotter.roundingOptions = (DataPlotter.RoundingOptions)EditorGUILayout.EnumPopup("Select a Rounding Option", dataPlotter.roundingOptions);
         }
 
             

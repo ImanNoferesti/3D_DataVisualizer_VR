@@ -70,6 +70,14 @@ public class DataPlotter : MonoBehaviour
     // Plot adjustments
     public bool adjustPlot;
     public float plotScale = 2;
+    public enum RoundingOptions
+    {
+        NoChange,
+        Ceil,
+        Round,
+        Floor
+    }
+    public RoundingOptions roundingOptions;
 
     // variables used for checking if a sphere is already created
     float radius;
@@ -121,17 +129,25 @@ public class DataPlotter : MonoBehaviour
     foreach (string key in columnList)
         Debug.Log("Column name is " + key);
 
+    
     // Assign column name from columnList to Name variables
     xName = columnList[columnX];
     yName = columnList[columnY];
     zName = columnList[columnZ];
-    eName = columnList[columnE];
 
-    // Assign column name from columnList to Threshold variables
-    x_Threshold = columnList[columnX_THold];
-    y_Threshold = columnList[columnY_THold];
-    z_Threshold = columnList[columnZ_THold];
+    try
+    {
+        eName = columnList[columnE];
+        // Assign column name from columnList to Threshold variables
+        x_Threshold = columnList[columnX_THold];
+        y_Threshold = columnList[columnY_THold];
+        z_Threshold = columnList[columnZ_THold];
+    }
 
+    catch (Exception ex)
+    {
+
+    }
 
     //Loop through Pointlist
     for (var i = 0; i < pointList.Count; i++)
@@ -147,27 +163,53 @@ public class DataPlotter : MonoBehaviour
         yMin = FindMinValue(yName);
         zMin = FindMinValue(zName);
 
-        // Get value in poinList at ith "row", in "column" Name, normalize
+        // Get value in poinList at ith "row", in "column" Name, Round it up/down    
+        float x_val, y_val, z_val;
+        if(roundingOptions == RoundingOptions.Ceil)
+        {
+            x_val = (float) Math.Ceiling(System.Convert.ToSingle(pointList[i][xName]));
+            y_val = (float) Math.Ceiling(System.Convert.ToSingle(pointList[i][yName]));
+            z_val = (float) Math.Ceiling(System.Convert.ToSingle(pointList[i][zName]));
+        }
+        else if(roundingOptions == RoundingOptions.Round)
+        {
+            x_val = (float) Math.Round(System.Convert.ToSingle(pointList[i][xName]));
+            y_val = (float) Math.Round(System.Convert.ToSingle(pointList[i][yName]));
+            z_val = (float) Math.Round(System.Convert.ToSingle(pointList[i][zName]));
+        }
+        else if(roundingOptions == RoundingOptions.Floor)
+        {
+            x_val = (float) Math.Floor(System.Convert.ToSingle(pointList[i][xName]));
+            y_val = (float) Math.Floor(System.Convert.ToSingle(pointList[i][yName]));
+            z_val = (float) Math.Floor(System.Convert.ToSingle(pointList[i][zName]));
+        }
+        else
+        {
+            x_val = System.Convert.ToSingle(pointList[i][xName]);
+            y_val = System.Convert.ToSingle(pointList[i][yName]);
+            z_val = System.Convert.ToSingle(pointList[i][zName]);
+        }
+
+        // normalize
         float x = 
-            (System.Convert.ToSingle(pointList[i][xName]) - xMin) / (xMax - xMin);
+            (x_val - xMin) / (xMax - xMin);
  
         float y = 
-            (System.Convert.ToSingle(pointList[i][yName]) - yMin) / (yMax - yMin);
+            (y_val - yMin) / (yMax - yMin);
  
         float z = 
-            (System.Convert.ToSingle(pointList[i][zName]) - zMin) / (zMax - zMin);
+            (z_val - zMin) / (zMax - zMin);
         
-        float e =
-                (System.Convert.ToSingle(pointList[i][eName]));
+        float e=0;
+        try
+        {
+            e = (System.Convert.ToSingle(pointList[i][eName]));
+        }
+        catch (Exception ex)
+        {
 
-        // float x = 
-        //     (System.Convert.ToSingle(pointList[i][xName]));
- 
-        // float y = 
-        //     (System.Convert.ToSingle(pointList[i][yName]));
- 
-        // float z = 
-        //     (System.Convert.ToSingle(pointList[i][zName]));
+        }
+        
 
         temp = new Vector3(x,y,z) * plotScale;
 
@@ -217,14 +259,14 @@ public class DataPlotter : MonoBehaviour
                 colE.Add(temp);
             }
 
-            //Instantiate text info
-            GameObject dataPointsInfo = Instantiate(
-                PointInfo, new Vector3(x-0.01f, y -0.02f, z) * plotScale,
-                Quaternion.identity);
+            // //Instantiate text info
+            // GameObject dataPointsInfo = Instantiate(
+            //     PointInfo, new Vector3(x-0.01f, y -0.02f, z) * plotScale,
+            //     Quaternion.identity);
 
-            dataPointsInfo.GetComponent<TextMesh>().text = dataPointName;
-            // Make child of PointInfo object, to keep points within container in hierarchy
-            dataPointsInfo.transform.parent = PointInfoHolder.transform;
+            // dataPointsInfo.GetComponent<TextMesh>().text = dataPointName;
+            // // Make child of PointInfo object, to keep points within container in hierarchy
+            // dataPointsInfo.transform.parent = PointInfoHolder.transform;
 
         
         }

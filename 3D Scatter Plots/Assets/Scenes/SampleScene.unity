@@ -523,9 +523,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a8586d1d360f24ea74eaa3502c4473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputfile: Sample
+  inputfile: Discrete Values Sample
   useColumnIndices: 1
-  addColorDimension: 0
+  addColorDimension: 1
   columnX: 1
   columnY: 3
   columnZ: 4
@@ -553,8 +553,9 @@ MonoBehaviour:
   PointInfoHolder: {fileID: 1217309374}
   BoxPrefab: {fileID: 8440550103030306857, guid: d8673ee67c8b227448edfb7ded3e7902,
     type: 3}
-  adjustPlot: 0
+  adjustPlot: 1
   plotScale: 2
+  roundingOptions: 3
   radius2: 0.03
   spherePrefab: {fileID: 9024493086568951670, guid: 406e756625747b14da0f8ddfd34e2fe5,
     type: 3}
