@@ -80,7 +80,7 @@ public class DataPlotter : MonoBehaviour
     public RoundingOptions roundingOptions;
 
     // variables used for checking if a sphere is already created
-    float radius = 0.001f;
+    float radius = 0.01f;
     Vector3 temp;
     int counter;
     List<Vector3> duplicates = new List<Vector3>();
