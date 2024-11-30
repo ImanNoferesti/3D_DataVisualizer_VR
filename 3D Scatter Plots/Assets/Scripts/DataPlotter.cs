@@ -80,7 +80,7 @@ public class DataPlotter : MonoBehaviour
     public RoundingOptions roundingOptions;
 
     // variables used for checking if a sphere is already created
-    float radius;
+    float radius = 0.001f;
     Vector3 temp;
     int counter;
     List<Vector3> duplicates = new List<Vector3>();
@@ -215,7 +215,7 @@ public class DataPlotter : MonoBehaviour
 
         //Checks to see if there exist a sphere in "temp" location.
         //if so, it adds that position to the "duplicates" list.
-        if (Physics.CheckSphere(temp, radius))
+        if (roundingOptions != RoundingOptions.NoChange && Physics.CheckSphere(temp, radius))
         {   
             duplicates.Add(temp);
 
@@ -379,7 +379,7 @@ public class DataPlotter : MonoBehaviour
                 spherePoints[k] *= radius2;
                 
                 //Instantiate equidistant points relative to its reference object
-                sphereObjects[k] = Instantiate(spherePrefab, (distinct[i] + spherePoints[k]), Quaternion.identity, transform);
+                sphereObjects[k] = Instantiate(spherePrefab, distinct[i] + spherePoints[k], Quaternion.identity, transform);
 
                 //change the color of spheres around the center point to magenta
                 if(countdown >= 1)
