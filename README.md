@@ -12,6 +12,35 @@ This Unity VR application provides a powerful and intuitive way to visualize lar
     * **Flooring:** Groups values to the nearest lower bound.
 * **Customizable Display:** Modify visual elements such as plot scale, point size, and color, to suit your data and analysis needs.
 
+## 🎥 Demonstrations
+
+**Visualizing Continuous Values**
+
+When working with continuous values, trends can be difficult to discern due to the sheer density and overlapping of data points. This application offers grouping options such as rounding, ceiling, or flooring to cluster values, making trends more visible and analysis more intuitive. 
+
+<div align="center">
+   <h3>Before Grouping</h3>
+  <img src="./Images/Cont_NoGrouping.gif" alt="Before Grouping" />
+</div>
+
+<div align="center">
+   <h3>Grouping for Clarity</h3>
+  <img src="./Images/Cont_Grouped.gif" alt="Grouping for Clarity" />
+</div>
+
+**Handling Discrete Overlaps**
+
+For discrete values, traditional scatter plots often fail to display overlapping points clearly, merging them into a single datapoint. Our program disperses these values equidistantly around their true position, allowing you to visualize the density of overlaps and identify patterns more effectively. 
+<div align="center">
+   <h3>The Challenge of Overlapping Points</h3>
+  <img src="./Images/Disc_Overlap.gif" alt="Overlap Problem" />
+</div>
+
+<div align="center">
+   <h3>Benefits of Equidistant Points</h3>
+  <img src="./Images/Disc_NoOverlap.gif" alt="Equidistant Points for Clarity" />
+</div>
+
 ## 💡 Use Cases
 * 🔍 Exploratory data analysis
 * 📊 Trend identification in large or complex datasets
