@@ -523,13 +523,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a8586d1d360f24ea74eaa3502c4473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputfile: samples_with_outliers
+  inputfile: Discrete Values Sample
   useColumnIndices: 1
   addColorDimension: 1
-  columnX: 0
-  columnY: 1
-  columnZ: 2
-  columnE: 3
+  columnX: 1
+  columnY: 3
+  columnZ: 4
+  columnE: 6
   xName: 
   yName: 
   zName: 
@@ -555,7 +555,7 @@ MonoBehaviour:
     type: 3}
   adjustPlot: 1
   plotScale: 2
-  roundingOptions: 1
+  roundingOptions: 2
   radius2: 0.03
   spherePrefab: {fileID: 9024493086568951670, guid: 406e756625747b14da0f8ddfd34e2fe5,
     type: 3}

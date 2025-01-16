@@ -242,9 +242,9 @@ public class DataPlotter : MonoBehaviour
  
             // Assigns original values to dataPointName
             string dataPointName =
-                pointList[i][xName] + ","
-                + pointList[i][yName] + ","
-                + pointList[i][zName];
+                Convert.ToDouble(pointList[i][xName]).ToString("F0") + "," +
+                Convert.ToDouble(pointList[i][yName]).ToString("F0") + "," +
+                Convert.ToDouble(pointList[i][zName]).ToString("F0");
  
             // Assigns name to the prefab
             dataPoint.transform.name = dataPointName;
@@ -259,14 +259,17 @@ public class DataPlotter : MonoBehaviour
                 colE.Add(temp);
             }
 
-            // //Instantiate text info
-            // GameObject dataPointsInfo = Instantiate(
-            //     PointInfo, new Vector3(x-0.01f, y -0.02f, z) * plotScale,
-            //     Quaternion.identity);
+            if(roundingOptions != RoundingOptions.NoChange || (roundingOptions == RoundingOptions.NoChange && x_val % 1 == 0 & y_val % 1 == 0 && z_val % 1 == 0))
+            {
+                //Instantiate text info
+                GameObject dataPointsInfo = Instantiate(
+                    PointInfo, new Vector3(x-0.01f, y -0.02f, z) * plotScale,
+                    Quaternion.identity);
 
-            // dataPointsInfo.GetComponent<TextMesh>().text = dataPointName;
-            // // Make child of PointInfo object, to keep points within container in hierarchy
-            // dataPointsInfo.transform.parent = PointInfoHolder.transform;
+                dataPointsInfo.GetComponent<TextMesh>().text = dataPointName;
+                // Make child of PointInfo object, to keep points within container in hierarchy
+                dataPointsInfo.transform.parent = PointInfoHolder.transform;
+            }
 
         
         }
